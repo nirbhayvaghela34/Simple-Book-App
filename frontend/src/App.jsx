@@ -4,7 +4,7 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-   <div className="bg-gray-800 mx-0 mt-7 lg:mx-40">
+   <div className="bg-gray-800 mx-5 mt-7 lg:mx-40">
     <Header />
     <main>
       <Outlet />

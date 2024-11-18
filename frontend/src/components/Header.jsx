@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "./index.js";
 import { useState } from "react";
+import { X } from 'lucide-react';
 
 function Header() {
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ function Header() {
     ];
 
     return (
-        <nav className="flex items-center justify-between p-4 text-white">
+        <nav className="flex items-center justify-between p-4 text-white ">
             <div>
                 <Link to="/">
                     <Logo />
@@ -34,7 +35,7 @@ function Header() {
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className="text-xl"
                 >
-                    {isMenuOpen ? 'X' : '☰'} {/* Toggle between menu icon and close icon */}
+                    {isMenuOpen ? <X /> : '☰'} {/* Toggle between menu icon and close icon */}
                 </button>
             </div>
             <ul
