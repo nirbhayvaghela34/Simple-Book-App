@@ -41,7 +41,7 @@ function Header() {
                 {/* Navigation Links */}
                 <div
                     className={`absolute inset-x-0 top-[64px] bg-[#1a202c] shadow-lg transition-transform duration-300 lg:static lg:shadow-none lg:bg-transparent lg:transform-none 
-                        ${ isMenuOpen ? "translate-y-0 block"  : "-translate-y-full hidden"} lg:translate-y-0 mx-4 mt-8`}
+                        ${ isMenuOpen ? "translate-y-0 block"  : "-translate-y-full hidden"} lg:translate-y-0 mx-4 lg:mx-0 mt-8 lg:mt-0`}
                 >
                     <ul className="flex flex-col lg:flex-row items-center lg:gap-8 text-gray-300 lg:text-white">
                         {navItems.map((navItem) => (
