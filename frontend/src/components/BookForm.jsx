@@ -76,7 +76,7 @@ const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = 'POST' }) => {
       </div>
 
       {/* Author */}
-      {!initialData && (
+      {!initialData?.name && (
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="author">
             Author
