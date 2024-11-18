@@ -40,9 +40,8 @@ function Header() {
 
                 {/* Navigation Links */}
                 <div
-                    className={`absolute inset-x-0 top-[64px] bg-[#1a202c] shadow-lg transition-transform duration-300 lg:static lg:shadow-none lg:bg-transparent lg:transform-none ${
-                        isMenuOpen ? "translate-y-0" : "-translate-y-full"
-                    }`}
+                    className={`absolute inset-x-0 top-[64px] bg-[#1a202c] shadow-lg transition-transform duration-300 lg:static lg:shadow-none lg:bg-transparent lg:transform-none 
+                        ${ isMenuOpen ? "translate-y-0 block"  : "-translate-y-full hidden"} lg:translate-y-0 mx-4 mt-8`}
                 >
                     <ul className="flex flex-col lg:flex-row items-center lg:gap-8 text-gray-300 lg:text-white">
                         {navItems.map((navItem) => (
@@ -51,7 +50,7 @@ function Header() {
                                     className="block w-full px-6 py-3 text-base font-medium hover:text-blue-400 lg:hover:text-blue-300"
                                     onClick={() => {
                                         navigate(navItem.slug);
-                                        setIsMenuOpen(false); // Close menu on click
+                                        setIsMenuOpen(false); // Close menu on click (mobile)
                                     }}
                                 >
                                     {navItem.name}
@@ -66,3 +65,4 @@ function Header() {
 }
 
 export default Header;
+

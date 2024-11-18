@@ -55,7 +55,7 @@ const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = 'POST' }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4 bg-white rounded shadow-md">
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4 bg-white rounded shadow-md my-5">
       <h2 className="text-2xl mb-4 text-center">{httpMethod === 'POST' ? 'Add a New Book' : 'Edit Book'}</h2>
       {loading && <p>Submitting...</p>}
       {error && <p className="text-red-500 text-center">{error.message || 'An error occurred'}</p>}
