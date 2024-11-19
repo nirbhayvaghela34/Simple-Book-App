@@ -67,7 +67,7 @@ const addBook = asyncHandler(async (req, res) => {
     author,
     description,
     price,
-    image: bookImage.url,
+    image: bookImage,
     available: available !== undefined ? available : true,
   });
 
@@ -101,6 +101,7 @@ const updateBookDetails = asyncHandler(async (req, res) => {
         throw new ApiError(500, "Failed to upload book image to Cloudinary.");
       }
 
+      console.log("delted Successfully.");
       const deletedBook = await deleteImageFromCloudinary(book.image);
       if (!deletedBook.success) {
         throw new ApiError(
@@ -108,8 +109,8 @@ const updateBookDetails = asyncHandler(async (req, res) => {
           "Failed to delete old book image from Cloudinary."
         );
       }
-
-      book.image = newBookImage.url;
+      
+      book.image = newBookImage;
     } catch (error) {
       throw new ApiError(500, "Image upload or deletion failed.");
     }

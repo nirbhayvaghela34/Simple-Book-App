@@ -18,14 +18,12 @@ const uploadOnCloudinary = async (localFilePath) => {
 
     // Delete the local file after upload
     fs.unlinkSync(localFilePath);
-    console.log(response.secure_url);
+    // console.log(response.secure_url);
     return response.secure_url; // Return the HTTPS URL from Cloudinary response
   } catch (error) {
     fs.unlinkSync(localFilePath);
     return null;
   }
 };
-
-
 
 export { uploadOnCloudinary };

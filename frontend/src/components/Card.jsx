@@ -10,7 +10,6 @@ const BookCard = ({ book, onDelete }) => {
     fetchData(`${url}/books/${book._id}`, "DELETE")
       .then(() => {
         onDelete(book._id);
-        console.log("Book Deleted Successfully.");
       })
       .catch((err) => {
         console.log(err);
