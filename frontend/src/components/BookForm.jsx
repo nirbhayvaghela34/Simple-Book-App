@@ -43,7 +43,8 @@ const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = "POST" }) => {
     Object.entries(book).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
+    console.log(book);
+    
     try {
       await fetchData(apiEndpoint, httpMethod, formData);
       navigate("/"); // Redirect on success

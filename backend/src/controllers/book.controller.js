@@ -52,7 +52,8 @@ const addBook = asyncHandler(async (req, res) => {
   }
 
   const bookImage = await uploadOnCloudinary(bookImageFilePath);
-
+  console.log(bookImage);
+  
   const existedBook = await Book.findOne({ name });
   if (existedBook) {
     // throw new ApiError(400, "This book already exists. You can update it.");
@@ -95,6 +96,7 @@ const updateBookDetails = asyncHandler(async (req, res) => {
   if (newBookImagePath) {
     try {
       const newBookImage = await uploadOnCloudinary(newBookImagePath);
+      console.log(newBookImage);
       if (!newBookImage) {
         throw new ApiError(500, "Failed to upload book image to Cloudinary.");
       }
