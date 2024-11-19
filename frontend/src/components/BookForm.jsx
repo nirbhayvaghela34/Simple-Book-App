@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useAxios from '../hook/useAxios.js';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAxios from "../hook/useAxios.js";
 
-const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = 'POST' }) => {
+const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = "POST" }) => {
   const [book, setBook] = useState({
-    name: initialData.name || '',
-    author: initialData.author || '',
-    description: initialData.description || '',
-    price: initialData.price || '',
-    image: initialData.image || '',
+    name: initialData.name || "",
+    author: initialData.author || "",
+    description: initialData.description || "",
+    price: initialData.price || "",
+    image: initialData.image || "",
     available: initialData.available || false,
   });
 
-  const [imagePreview, setImagePreview] = useState(initialData.image || '');
+  const [imagePreview, setImagePreview] = useState(initialData.image || "");
   const { fetchData, loading, error } = useAxios();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    if (name === 'image') {
+    if (name === "image") {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
@@ -31,11 +31,10 @@ const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = 'POST' }) => {
     } else {
       setBook({
         ...book,
-        [name]: type === 'checkbox' ? checked : value,
+        [name]: type === "checkbox" ? checked : value,
       });
     }
   };
-  console.log(book);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,21 +43,18 @@ const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = 'POST' }) => {
     Object.entries(book).forEach(([key, value]) => {
       formData.append(key, value);
     });
-    console.log(formData, "YES");
 
     try {
       await fetchData(apiEndpoint, httpMethod, formData);
-      navigate('/');
+      navigate("/"); // Redirect on success
     } catch (err) {
-      console.error(err);
+      console.error("Submission failed:", err); // Optionally log for debugging
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4 bg-white rounded shadow-md my-5">
-      <h2 className="text-2xl mb-4 text-center">{httpMethod === 'POST' ? 'Add a New Book' : 'Edit Book'}</h2>
-      {loading && <p>Submitting...</p>}
-      {error && <p className="text-red-500 text-center">{error.message || 'An error occurred'}</p>}
+      <h2 className="text-2xl mb-4 text-center">{httpMethod === "POST" ? "Add a New Book" : "Edit Book"}</h2>
 
       {/* Book Name */}
       <div className="mb-4">
@@ -159,11 +155,18 @@ const BookForm = ({ initialData = {}, apiEndpoint, httpMethod = 'POST' }) => {
         </label>
       </div>
 
+      {loading && <h3 className="text-black">Submitting...</h3>}
+      {error && (
+        <div className="text-red-500 text-center mb-4">
+          {error.message}
+        </div>
+      )}
+
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full sm:w-auto"
         type="submit"
       >
-        {httpMethod === 'POST' ? 'Submit' : 'Update'}
+        {httpMethod === "POST" ? "Submit" : "Update"}
       </button>
     </form>
   );

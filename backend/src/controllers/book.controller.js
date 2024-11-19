@@ -36,32 +36,29 @@ const getBooks = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(200, books, `Books fetched successfully.`)
-    );
+    .json(new ApiResponse(200, books, `Books fetched successfully.`));
 });
 
 const addBook = asyncHandler(async (req, res) => {
   const { name, author, description, price, available } = req.body;
-  console.log(req.body);
-  
+
   if (!name || !author || !description || !price) {
-     throw new ApiError(404, "Please fill all credentials.");
+    throw new ApiError(400, "Please fill all credentials.");
   }
 
   const bookImageFilePath = req.file?.path;
-  console.log(req.file);
   if (!bookImageFilePath) {
-    throw new ApiError(404, "Please provide image of book.");
+    throw new ApiError(400, "Please provide image of book.");
   }
 
   const bookImage = await uploadOnCloudinary(bookImageFilePath);
 
-  const existedBook = await Book.findOne({
-    name,
-  });
+  const existedBook = await Book.findOne({ name });
   if (existedBook) {
-    throw new ApiError(404, "This book is Already exits.You can updat.");
+    // throw new ApiError(400, "This book already exists. You can update it.");
+    return res
+      .status(400)
+      .json(new ApiResponse(400, null, "This book already exists. You can update it."));
   }
 
   const book = await Book.create({
@@ -70,7 +67,7 @@ const addBook = asyncHandler(async (req, res) => {
     description,
     price,
     image: bookImage.url,
-    available: !available && true,
+    available: available !== undefined ? available : true,
   });
 
   return res

@@ -20,6 +20,19 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
+// Custom Error Handler Middleware
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "Internal Server Error";
+  
+  // Send structured error response
+  res.status(status).json({
+    success: false,
+    status,
+    message,
+  });
+});
+
 connectDB()
   .then(() => {
     app.on("error", (error) => {
