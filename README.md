@@ -48,15 +48,3 @@ This is a simple CRUD (Create, Read, Update, Delete) application built with the 
    ```bash
    npm start
    ```
-
-## API Endpoints
-| Method | Endpoint       | Description             |
-|--------|----------------|-------------------------|
-| GET    | `/api/items`   | Fetch all items         |
-| POST   | `/api/items`   | Create a new item       |
-| GET    | `/api/items/:id` | Fetch a single item     |
-| PUT    | `/api/items/:id` | Update an existing item |
-| DELETE | `/api/items/:id` | Delete an item          |
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
