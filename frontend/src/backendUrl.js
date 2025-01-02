@@ -1,1 +1,1 @@
-export default "https://synthwave-backend.vercel.app/api/v1";
+export default "https://simple-book-app.onrender.com/api/v1";
